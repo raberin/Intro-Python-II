@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -36,8 +37,11 @@ room['treasure'].s_to = room['narrow']
 #
 # Main
 #
-
+print('Welcome to the Intro to Python II - Game')
+player_name = input('Please input your character name: ')
+new_player = Player(player_name, room['outside'])
 # Make a new player object that is currently in the 'outside' room.
+
 
 # Write a loop that:
 #
