@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from items import Item
 
 spacer = '\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n'
 
@@ -34,6 +35,14 @@ room['overlook'].s_to = room['foyer']
 room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
+
+# Items in rooms
+room['outside'].items = [Item('sword'), Item('ring')]
+room['foyer'].items = [Item('axe')]
+room['overlook'].items = [Item('scimitar')]
+room['narrow'].items = [Item('claymore')]
+room['treasure'].items = [Item('gold'), Item('potion')]
+
 
 #
 # Main
@@ -80,7 +89,7 @@ while isRunning:
         choice = input('Please input your choice here: ').lower()
         spacer = '\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n'
 
-    # Conditionals for each input
+    # Conditionals for each input and movement between each room
     if choice == 'q':
         print('You are now quitting the game...\n Goodbye!')
         isRunning = False
