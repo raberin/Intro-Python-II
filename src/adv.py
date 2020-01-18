@@ -9,8 +9,7 @@ room = {
     'outside':  Room("Outside Cave Entrance",
                      "North of you, the cave mount beckons"),
 
-    'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+    'foyer':    Room("Foyer", """Dim light filters in from the south.\nDusty passages run north and east."""),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
@@ -60,21 +59,51 @@ print(spacer)
 # If the user enters "q", quit the game.
 isRunning = True
 while isRunning:
+    # Displays current location
     print(f"Your current location: {new_player.current_room.name}\n")
-    for current_room in room:
-        if new_player.current_room.name == room[current_room].name:
-            print(room[current_room].description)
+    # print(new_player.current_room, new_player.current_room.n_to)
+    for current in room:
+        if new_player.current_room.name == room[current].name:
+            print(room[current].description)
+            print(spacer)
+
+    # Display input options
     print(
         f"Where would you like to go? \n [n] North    [s] South   [e] East    [w] West    [q] Quit")
-    choice = input('Please input your choice here: ')
+    choice = input('Please input your choice here: ').lower()
     spacer = '\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n'
 
+    # Error handling for incorrect input
     while choice not in ['n', 's', 'e', 'w', 'q']:
         print(
             "Invalid option. Please, choose: \n[n] North    [s] South   [e] East    [w] West    [q] Quit ")
-        choice = input('Please input your choice here: ')
+        choice = input('Please input your choice here: ').lower()
         spacer = '\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n'
 
+    # Conditionals for each input
     if choice == 'q':
         print('You are now quitting the game...\n Goodbye!')
         isRunning = False
+    elif choice == 'n' and new_player.current_room.n_to != None:
+        print(spacer)
+        print('You walk north.')
+        new_player.current_room = new_player.current_room.n_to
+        print(spacer)
+    elif choice == 's' and new_player.current_room.s_to != None:
+        print(spacer)
+        print('You walk south.')
+        new_player.current_room = new_player.current_room.s_to
+        print(spacer)
+    elif choice == 'e' and new_player.current_room.n_to != None:
+        print(spacer)
+        print('You walk east.')
+        new_player.current_room = new_player.current_room.e_to
+        print(spacer)
+    elif choice == 'w' and new_player.current_room.n_to != None:
+        print(spacer)
+        print('You walk west.')
+        new_player.current_room = new_player.current_room.w_to
+        print(spacer)
+    else:
+        print('You hit a magic barrier that wont let you pass. \n Please choose another direction.')
+        print(spacer)
